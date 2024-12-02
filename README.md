@@ -174,7 +174,7 @@ To be able to have a secure password policy we will install the libpam-pwquality
 Once installed we will modify the common-password file at the /etc/pam.d/common-password using Vim
 - `sudo vim /etc/pam.d/common-password`
 
-We will the next text after the "# here are the pre-package modules (the "Primary" block) after the "retry=3"
+We will the next text after the "# here are the pre-package modules (the "Primary" block)" after the "retry=3"
 - minlen=10 lcredit=-1 ucredit=-1 dcredit=-1 maxrepeat=3 difok=7 reject_username enforce_for_root
 
 We can also use the pwquality.config file
