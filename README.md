@@ -73,9 +73,13 @@ m/user-attachments/assets/514b1e7e-8c66-42f8-aeba-7a3292057acf)
 
 ### Basic system and Grub installation
 - Once the previous is done it will continue with the basic system installation
+
 ![image](https://github.com/user-attachments/assets/870ab765-6a25-41cb-b519-986c82dff927)
+
 - Select "no" here
+
 ![image](https://github.com/user-attachments/assets/9132141b-3e41-413e-8fe2-4cf838d2c674)
+
 - Select "deb.debian.org"
 ![image](https://github.com/user-attachments/assets/0ab410a8-8c8f-4d7a-b248-016a98af4e16)
 - Leave in blank the proxy
@@ -86,32 +90,116 @@ m/user-attachments/assets/514b1e7e-8c66-42f8-aeba-7a3292057acf)
 - Use space to deselect the "ssh" and "standard system utilities"
 ![image](https://github.com/user-attachments/assets/cf761d23-3ff0-4917-a4b8-e90cdbc5445d)
 - When asked about the GRUB select "yes" to install it at the primary drive
+
 ![image](https://github.com/user-attachments/assets/a2ab6210-84a2-45ff-a8dc-f88ec61dfc16)
-- Select your drive 
+
+- Select your drive
+
 ![image](https://github.com/user-attachments/assets/51a600a8-ed6a-4c25-98ee-e50906826a2a)
+
 - Select "Continue" to reboot the system and lauch the VM
+
 ![image](https://github.com/user-attachments/assets/b9908381-3f16-40fa-9aa4-448654361b45)
 
 ## Virtual Machine configuration
 ### Sudo installation and strict configuration
 On the CM restart it will ask for your passphrase and your login credentials
-Once they are introduced you will be on your shell:
+Once they are introduced you will be on your shell
+Check your partitions usign th lsblk command
+- `lsblk`
+
+![image](https://github.com/user-attachments/assets/7d996153-8af8-4c75-9027-05d40000b416)
+
 
 ![image](https://github.com/user-attachments/assets/0de6806f-88a7-49b3-b0ea-342ac8ff06b9)
 
 Change to the root user to be able to install packages using the su command
 - `su - `
-- Introduce your host password to change to the root superuse
+
+Introduce your host password to change to the root superuse
 Use the next commands to update the package list and upgrade it:
+
 - `apt-get update -y`
 - `apt-get upgrade -y`
--  Install sudo usign the next command
+
+Install sudo usign the next command
 - `apt-get install sudo`
-- 
 
+Install the vim editor (just if you want, you can also use nano to edit files)
+- `apt-get install vim`
 
+Now that sudo is installed we have to add our user to the sudo group and to the sudoers file
+To modify the sudoers file we use the visudo command on the root user:
+- `sudo visudo`
+- look for the line "# user privilege specification" and add the next line
+- `<your_username>  ALL=(ALL) ALL`
+![image](https://github.com/user-attachments/assets/96a07dd2-d581-4bfc-b55f-f47ec34d9082)
 
+This will grant all the privileges to your user and you can use sudo with it.
+Press ctrl+x then "y" and "enter" to save the changes
+To add to a group we use the usermod command with the -aG flag, this means --append --group:
+- `sudo usermod -aG <group> <username>`
 
+To check the sudo group and confirm the change was correct:
+- `sudo getent group sudo` 
+### Now we can configure the sudo strict requisites:
+We need to add to the sudoers file the requisites, we can do this in the first part of the file were the "Defaults" requisites are located
+The ones we will be using will be the next:
+- Defaults      requiretty
+- Defaults      badpass_message="Wrong password, please try again"
+- Defaults      passwd_tries=3
+- Defaults      secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+- Defaults      logfile="/var/log/sudo/sudo.log"
+- Defaults      log_input, log_output
+
+![image](https://github.com/user-attachments/assets/e8503b87-5dd9-4ff2-bce2-ac2d5d3debe5)
+
+Save this changes and we can create the log file in the "/var/log/sudo/" directory
+- `cd /var/log`
+- `mkdir sudo`
+- `touch sudo.log`
+
+Use a sudo command to verify that the log is working and then check the log file using cat
+- `sudo getent group sudo`
+- `cat /var/log/sudo/sudo.log`
+
+You should see the last used command with sudo:
+
+![image](https://github.com/user-attachments/assets/6780c1b6-b2be-4d8b-8cbf-efbcb788ae69)
+
+### Strong password configuration
+To be able to have a secure password policy we will install the libpam-pwquality package
+- `sudo apt install libpam-pwquality -y`
+
+Once installed we will modify the common-password file at the /etc/pam.d/common-password using Vim
+- `sudo vim /etc/pam.d/common-password`
+
+We will the next text after the "# here are the pre-package modules (the "Primary" block) after the "retry=3"
+- minlen=10 lcredit=-1 ucredit=-1 dcredit=-1 maxrepeat=3 difok=7 reject_username enforce_for_root
+
+We can also use the pwquality.config file
+- `sudo vim /security/pwquality.config`
+
+And set all the values needed in this file, it does the same and we can use both.
+
+Save the file and exit
+Now we hace to modify the login defs to set the password expiry dates
+This we can do using the login.defs file and look for the "#password aging controls"
+- `sudo vim /etc/login.defs`
+
+![image](https://github.com/user-attachments/assets/346a2546-0e0a-42a9-b42a-a0c0e46437fd)
+
+The result must be like this:
+
+![image](https://github.com/user-attachments/assets/b2464753-c401-4d07-bf5a-79acb4e27040)
+
+Check yur user or the root aging with the chage command
+- `sudo chage -l <your_user>`
+
+You will see that the numbers have not changed, in this case use the chage command to modify them
+- `sudo chage -M 30 <login>` for the maxdays
+- `sudo chage -m 2 <login>` for the mindays
+- `sudo chage -W 7 <login>` for the warning days
 
 
 
