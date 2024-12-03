@@ -1,4 +1,13 @@
 # 🛠️ BORN2BEROOT
+
+## 📋 Table of contents
+1. [About the project](#about-the-project)
+2. [Project goals](#project-goals)
+   - [The main objectives](#the-main-objectives-of-this-project-are)
+   - [Additional](#additionally,-you'll-focus-on-strict-security-protocols,-such-as:)
+3. [What you will learn](#what-you'll-learn)
+4. [Practical guide](#practical-guide-to-the-project)
+
 ## 🎓 About the Project
 
 This repository is part of the Born2beRoot (B2BR) project, which is included in the common core of École 42 Lausanne. The goal of the project is to learn how to use and personalize a Virtual Machine (VM) for practical use in system administration tasks.
@@ -31,7 +40,7 @@ Additionally, you'll focus on strict security protocols, such as:
   - Learn how to implement and document configuration choices 📝
   - Build critical skills for a career in IT or cybersecurity 🔒
 
-## 📘 Practical guide to the proyect.
+## 📘 Practical guide to the proyect
 
 ## 1. Install the virtual machine
 
