@@ -2,9 +2,9 @@
 
 ## 📋 Table of contents
 1. [About the project](#about-the-project)
-2. [Project goals](#project-goals)
+2. [Project goals](##project-goals)
    - [The main objectives](#the-main-objectives-of-this-project-are)
-   - [Additional](#additionally,-you'll-focus-on-strict-security-protocols,-such-as:)
+   - [Additional](#additionally-youll-focus-on-strict-security-protocols-such-as)
 3. [What you will learn](#what-you'll-learn)
 4. [Practical guide](#practical-guide-to-the-project)
 
