@@ -26,6 +26,8 @@
       - [Modify the Hostname](#44-modifying-the-host-name)
    5. [Monitoring script](#5-creating-a-monitoring-script)
       - [Setting up the crontab automatization](#set-the-crontab)
+   6. [Signature](#6-signature)
+      - [Considerations](#to-consider-before-submitting-the-project)
 
 ## 🎓 About the Project
 
@@ -461,5 +463,38 @@ Add the next line to the end of the file to set the script every 10 minutes
 - `*/10 * * * * /usr/local/bin/monitoring.sh`
 
 By now you should have finished the configuration now its up to you to find the information needed to pass your evaluation.
+
+## 6. Signature
+To be able to present the project you must add a signature.txt file to your repository
+First open a terminal and go to your VM directory, you must make sure that the folder contains a `.vdi` file
+
+![image](https://github.com/user-attachments/assets/127040d9-1f7d-42d9-9f0e-0e45a5cfda7a)
+
+Now we can use the `shasum` command to be able to get the signature:
+
+- `shasum Born2beroot-guide.vdi` in my case
+
+The result will be a number like this:
+
+**" 94ec17842784c6e5a683d7f7b97984c83fd841bc  Born2beroot-guide.vdi "**
+
+You have to save this into the repository, to do so you can use:
+- `echo "94ec17842784c6e5a683d7f7b97984c83fd841bc" > signature.txt`
+
+### To consider before submitting the project
+There are some things that can make this number change before the evaluation:
+- Avoid opening the VM once this is done and you have submitted the signature
+- Create a clone of the machine to save the last status before submitting it
+- Make a snapshot of your machine and take the signature after, so you can revert it after using it
+- Be aware that, even just launching the machine, will modify the signature.
+- Once you have finished use only the clone, you can redo a clone for each evaluation if necessary.
+
+**¡¡ REMEMBER TO GIT PUSH !!**
+
+
+
+
+
+
 
 
