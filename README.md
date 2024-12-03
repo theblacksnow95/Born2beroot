@@ -1,12 +1,12 @@
 # 🛠️ BORN2BEROOT
 
 ## 📋 Table of contents
-1. [About the project](#about-the-project)
-2. [Project goals](##project-goals)
+1. [About the project](#-about-the-project)
+2. [Project goals](#-project-goals)
    - [The main objectives](#the-main-objectives-of-this-project-are)
    - [Additional](#additionally-youll-focus-on-strict-security-protocols-such-as)
-3. [What you will learn](#what-you'll-learn)
-4. [Practical guide](#practical-guide-to-the-project)
+3. [What you will learn](#-what-youll-learn)
+4. [Practical guide](#-practical-guide-to-the-project)
 
 ## 🎓 About the Project
 
@@ -25,7 +25,7 @@ The Born2beRoot project introduces you to the basics of system administration an
       - Firewall rules
       - System monitoring tools
 
-Additionally, you'll focus on strict security protocols, such as:
+### Additionally, you'll focus on strict security protocols, such as:
 
   - Enforcing strong password policies
   - Configuring sudo access
@@ -40,7 +40,7 @@ Additionally, you'll focus on strict security protocols, such as:
   - Learn how to implement and document configuration choices 📝
   - Build critical skills for a career in IT or cybersecurity 🔒
 
-## 📘 Practical guide to the proyect
+## 📘 Practical guide to the project
 
 ## 1. Install the virtual machine
 
