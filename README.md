@@ -15,7 +15,7 @@
    2. [Virtual Machine Configuration](#2-virtual-machine-configuration)
       - [Sudo installation](#21-sudo-installation-and-strict-configuration)
       - [Sudo strict rules](#22-configuring-the-sudo-strict-requisites)
-      - [Password configuration](23-strong-password-configuration)
+      - [Password configuration](#23-strong-password-configuration)
    3. [SSH and UFW](#3-configuring-the-ssh-and-ufw-services)
       - [Configure SSH](#31-installing-ssh)
       - [Setting up UFW](#32-installing-ufw)
