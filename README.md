@@ -449,7 +449,8 @@ We need to install net-tools
 - fill your script with the commands needed.
 
 Go to the visudo file using `sudo visudo`
-Add the line "<username>  ALL=(ALL) NOPASSWD: /usr/local/bin/monitoring.sh" after the %sudo ALL=(ALL:ALL) ALL
+
+Add the line "username  ALL=(ALL) NOPASSWD: /usr/local/bin/monitoring.sh" after the %sudo ALL=(ALL:ALL) ALL line
 
 Save the file and reboot the system with `sudo reboot`
 
@@ -486,8 +487,8 @@ There are some things that can make this number change before the evaluation:
 - Avoid opening the VM once this is done and you have submitted the signature
 - Create a clone of the machine to save the last status before submitting it
 - Make a snapshot of your machine and take the signature after, so you can revert it after using it
-- Be aware that, even just launching the machine, will modify the signature.
-- Once you have finished use only the clone, you can redo a clone for each evaluation if necessary.
+- Be aware that, even just launching the machine, will modify the signature
+- Once you have finished use only the clone, you can redo a clone for each evaluation if necessary
 
 **¡¡ REMEMBER TO GIT PUSH !!**
 
