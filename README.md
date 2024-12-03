@@ -7,6 +7,25 @@
    - [Additional](#additionally-youll-focus-on-strict-security-protocols-such-as)
 3. [What you will learn](#-what-youll-learn)
 4. [Practical guide](#-practical-guide-to-the-project)
+   1. [Installation](#1-install-the-virtual-machine)
+      - [VirtualBox](#11-launch-virtualbox)
+      - [Start installation process](#launch-the-vm-and-start-the-installation)
+      - [LVM installation](#lvm-installation)
+      - [Basic System and Grub](#basic-system-and-grub-installation)
+   2. [Virtual Machine Configuration](#2-virtual-machine-configuration)
+      - [Sudo installation](#21-sudo-installation-and-strict-configuration)
+      - [Sudo strict rules](#22-configuring-the-sudo-strict-requisites)
+      - [Password configuration](23-strong-password-configuration)
+   3. [SSH and UFW](#3-configuring-the-ssh-and-ufw-services)
+      - [Configure SSH](#31-installing-ssh)
+      - [Setting up UFW](#32-installing-ufw)
+   4. [Groups and Hosts](#4-groups-and-hosts)
+      - [Create a Group](#41-group-creation)
+      - [Create a User](#42-user-creation)
+      - [Change the Password](#43-password-change)
+      - [Modify the Hostname](#44-modifying-the-host-name)
+   5. [Monitoring script](#5-creating-a-monitoring-script)
+      - [Setting up the crontab automatization](#set-the-crontab)
 
 ## 🎓 About the Project
 
@@ -44,7 +63,8 @@ The Born2beRoot project introduces you to the basics of system administration an
 
 ## 1. Install the virtual machine
 
-### 1.1 This must be handled using VirtuaBox (you can download it [here](https://www.virtualbox.org/wiki/Downloads))
+### 1.1 Launch VirtualBox
+You can download it [here](https://www.virtualbox.org/wiki/Downloads
 - You can also use the terminal command:
 - `sudo apt update -y`
 - `sudo apt upgrade -y`
@@ -109,7 +129,7 @@ Once is installed we can download the iso image, for this example I have downloa
 
 - You will have to repeat it to confirm it
 
-### LVM instalation
+### LVM installation
 - Now it will ask you to choose the partition level, we will choose the Guided - Use entire disk and set up encrypted LVM
 
 ![image](https://github.com/user-attachments/assets/7957d8a5-cd14-45da-bef5-f2c6334cd09a)
@@ -186,7 +206,7 @@ Once is installed we can download the iso image, for this example I have downloa
 
 
 ## 2. Virtual Machine configuration
-### 2.2 Sudo installation and strict configuration
+### 2.1 Sudo installation and strict configuration
 On the CM restart it will ask for your passphrase and your login credentials
 Once they are introduced you will be on your shell
 Check your partitions usign th lsblk command
@@ -228,8 +248,9 @@ To add to a group we use the usermod command with the -aG flag, this means --app
 
 To check the sudo group and confirm the change was correct:
 - `sudo getent group sudo` 
-### 2.3 Configuring the sudo strict requisites:
-We need to add to the sudoers file the requisites, we can do this in the first part of the file were the "Defaults" requisites are located
+### 2.2 Configuring the sudo strict requisites:
+We need to add to the sudoers file the requisites, we can do this in the first part of the sudoers file were the "Defaults" requisites are located
+Open the file using the command `sudo visudo` on the root user
 The ones we will be using will be the next:
 - Defaults      requiretty
 - Defaults      badpass_message="Wrong password, please try again"
@@ -241,11 +262,13 @@ The ones we will be using will be the next:
 ![image](https://github.com/user-attachments/assets/e8503b87-5dd9-4ff2-bce2-ac2d5d3debe5)
 
 Save this changes and we can create the log file in the "/var/log/sudo/" directory
+
 - `cd /var/log`
 - `mkdir sudo`
 - `touch sudo.log`
 
 Use a sudo command to verify that the log is working and then check the log file using cat
+
 - `sudo getent group sudo`
 - `cat /var/log/sudo/sudo.log`
 
@@ -253,15 +276,18 @@ You should see the last used command with sudo:
 
 ![image](https://github.com/user-attachments/assets/6780c1b6-b2be-4d8b-8cbf-efbcb788ae69)
 
-### 2.4 Strong password configuration
+### 2.3 Strong password configuration
 To be able to have a secure password policy we will install the libpam-pwquality package
+
 - `sudo apt install libpam-pwquality -y`
 
 Once installed we will modify the common-password file at the /etc/pam.d/common-password using Vim
+
 - `sudo vim /etc/pam.d/common-password`
 
 We will the next text after the "# here are the pre-package modules (the "Primary" block)" after the "retry=3"
-- minlen=10 lcredit=-1 ucredit=-1 dcredit=-1 maxrepeat=3 difok=7 reject_username enforce_for_root
+
+- **minlen=10 lcredit=-1 ucredit=-1 dcredit=-1 maxrepeat=3 difok=7 reject_username enforce_for_root**
 
 We can also use the pwquality.config file
 
@@ -293,7 +319,7 @@ You will see that the numbers have not changed, in this case use the `chage` com
 
 Repeat this for the root user and your user to make sure it is done, for the new users it should be the new default
 
-## 3. Configuring the SSH service and the UFW
+## 3. Configuring the SSH and UFW services
 ### 3.1 Installing SSH
 
 The SSH allows to connect to the machine using an encripted secure shell connection.
@@ -425,7 +451,7 @@ Add the line "<username>  ALL=(ALL) NOPASSWD: /usr/local/bin/monitoring.sh" afte
 
 Save the file and reboot the system with `sudo reboot`
 
-### Set the crontab automation
+### Set the crontab
 Crontab is a table of automated commands and scripts
 
 - `sudo crontab -u root -e`
