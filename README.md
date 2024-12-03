@@ -64,7 +64,7 @@ The Born2beRoot project introduces you to the basics of system administration an
 ## 1. Install the virtual machine
 
 ### 1.1 Launch VirtualBox
-You can download it [here](https://www.virtualbox.org/wiki/Downloads
+You can download it [here](https://www.virtualbox.org/wiki/Downloads)
 - You can also use the terminal command:
 - `sudo apt update -y`
 - `sudo apt upgrade -y`
