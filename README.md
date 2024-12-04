@@ -442,7 +442,7 @@ After the change we need to reboot to make the changes available
 ## 5. Creating a monitoring script
 We need to install net-tools 
 
-- `sudo apt install net-tools -y
+- `sudo apt install net-tools -y`
 - Go to `/usr/local/bin`
 - create the file with touch `touch monitoring.sh`
 - use chmod `sudo chmod 777 monitoring.sh`
